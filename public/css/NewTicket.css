@@ -1,0 +1,311 @@
+/* ============================================================
+   VARIABLES CSS GLOBALES
+   Couleurs réutilisables partout dans le fichier
+   ============================================================ */
+:root {
+    --card: #c4e2fa;    /* Fond bleu clair des cartes */
+    --text: #222;       /* Couleur du texte principal */
+    --muted: #555;      /* Texte secondaire grisé */
+    --border: #000000;  /* Couleur des bordures — noir */
+    --primary: #012222; /* Couleur principale — vert très foncé */
+}
+
+
+/* ------------------------------------------------------------
+   RESET BOX-SIZING
+   Par défaut les navigateurs calculent la taille des éléments
+   sans compter le padding et les bordures — ce reset corrige ça
+   Avec border-box : padding + bordure sont INCLUS dans la taille
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   CLASSE UTILITAIRE — CACHER UN ÉLÉMENT
+   .titanic = "coulé", donc caché !
+   display: none → l'élément est complètement retiré de la page
+   !important → cette règle ne peut pas être écrasée par une autre
+   ------------------------------------------------------------ */
+.titanic {
+    display: none !important;
+}
+
+
+/* ------------------------------------------------------------
+   BARRE DE NAVIGATION (fixée en haut)
+   ------------------------------------------------------------ */
+.top{
+    width: 100%;
+    height: 100px;
+    background-color: #012222;  /* Vert très foncé */
+    color: white;
+    display: flex;
+    align-items: center;        /* Centre le contenu verticalement */
+    padding: 0 2px;
+    justify-content: center;    /* Centre le contenu horizontalement */
+    position: fixed;            /* Reste en haut même en scrollant */
+    top: 0;
+    left: 0;
+}
+
+.top h1{
+    margin: 0;
+    font-size: 2rem;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENEUR DE PAGE
+   Limite la largeur et centre le contenu
+   padding-top: 140px pour ne pas passer sous la navbar fixe
+   ------------------------------------------------------------ */
+.page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 140px 16px 48px;
+}
+
+
+/* ------------------------------------------------------------
+   EN-TÊTE DE PAGE
+   ------------------------------------------------------------ */
+.page-header h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+}
+
+.page-header p {
+    margin: 0 0 24px;
+    color: var(--muted); /* Texte grisé */
+}
+
+
+/* ------------------------------------------------------------
+   CARTES
+   Boîtes avec fond bleu clair qui regroupent les sections
+   ------------------------------------------------------------ */
+.card {
+    background: var(--card);    /* Fond bleu clair */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;        /* Espace entre les cartes */
+}
+
+.card h2 {
+    margin: 0 0 16px;
+    font-size: 1.2rem;
+}
+
+
+/* ------------------------------------------------------------
+   CHAMPS DE FORMULAIRE
+   Conteneur d'un label + input
+   display: grid permet d'empiler label et input proprement
+   ------------------------------------------------------------ */
+.field {
+    display: grid;
+    gap: 6px;           /* Espace entre le label et l'input */
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.field span {
+    color: var(--muted); /* Label grisé */
+}
+
+
+/* ------------------------------------------------------------
+   INPUTS, TEXTAREAS, SELECTS
+   Style uniforme pour tous les champs du formulaire
+   ------------------------------------------------------------ */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font: inherit;  /* Hérite de la police de la page */
+    background: #fff;
+}
+
+/* Le textarea peut être redimensionné verticalement seulement */
+textarea {
+    resize: vertical;
+}
+
+
+/* ------------------------------------------------------------
+   GRILLES RESPONSIVE
+   S'adaptent automatiquement à la largeur disponible
+   auto-fit + minmax = les colonnes se réorganisent toutes seules
+   ------------------------------------------------------------ */
+
+/* Grille 3 colonnes (min 200px chacune) */
+.grid-3 {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Grille 2 colonnes (min 220px chacune) */
+.grid-2 {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+
+/* ------------------------------------------------------------
+   SUIVI DE STATUT
+   Liste de badges affichant les différents statuts possible
+   ------------------------------------------------------------ */
+.status-track {
+    list-style: none; /* Pas de puces */
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.status-track li {
+    border: 1px solid var(--border);
+    border-radius: 20px; /* Forme arrondie */
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+/* ------------------------------------------------------------
+   SECTION SAISIE DE TEMPS
+   ------------------------------------------------------------ */
+.time-entries h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+}
+
+.time-entries p {
+    margin: 0 0 12px;
+    color: var(--muted);
+}
+
+/* Grille pour les entrées de temps : date | durée | description */
+.entry-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 160px 140px 1fr; /* Colonnes fixes pour date et durée, flexible pour description */
+    margin-bottom: 10px;
+}
+
+/* En-tête de la grille de temps — texte grisé plus petit */
+.entry-grid--head {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+
+/* ------------------------------------------------------------
+   GROUPE DE CHIPS (badges/tags)
+   ⚠️ gap: 100px est très grand — probablement une erreur,
+   devrait être gap: 8px ou gap: 10px
+   ------------------------------------------------------------ */
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px; /* ⚠️ Suspicieux — écart de 100px entre chaque chip */
+}
+
+/* Badge individuel */
+.chip {
+    border: 1px solid var(--border);
+    border-radius: 20px; /* Forme arrondie */
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+}
+
+
+/* ------------------------------------------------------------
+   TEXTE D'AIDE
+   Petit texte indicatif sous un champ
+   ------------------------------------------------------------ */
+.hint {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+
+/* ------------------------------------------------------------
+   ZONE D'ACTIONS (boutons en bas de formulaire)
+   Aligne les boutons à droite
+   ------------------------------------------------------------ */
+.actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end; /* Boutons collés à droite */
+    align-items: center;
+    flex-wrap: wrap;           /* Passe à la ligne sur petit écran */
+}
+
+
+/* ------------------------------------------------------------
+   BOUTONS
+   ------------------------------------------------------------ */
+.btn {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font: inherit;
+    cursor: pointer;
+    background: #fff;
+}
+
+/* Bouton principal — fond vert foncé, texte blanc */
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+
+/* ------------------------------------------------------------
+   BANNIÈRES DE NOTIFICATION
+   ------------------------------------------------------------ */
+
+/* Succès — fond vert */
+.success-banner {
+    background: #1f6f54;
+    color: #fff8f2;
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 16px 30px rgba(31, 111, 84, 0.25); /* Ombre verte */
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure blanche semi-transparente */
+}
+
+/* Erreur — fond rouge foncé */
+.fail-banner {
+    background: #6f1f24;
+    color: #fff8f2;
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 16px 30px rgba(111, 31, 36, 0.25); /* Ombre rouge */
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,474 @@
+/* ============================================================
+   FICHIER : resources/css/app.css (ou équivalent)
+   Feuille de styles principale de l'application
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   VARIABLES CSS GLOBALES
+   Définit les couleurs réutilisables partout dans le CSS
+   Comme des constantes, si on veut changer une couleur
+   on la change ici et ça se répercute partout
+   ------------------------------------------------------------ */
+:root {
+    --bg: #f0f2f6;      /* Couleur de fond claire (haut de page) */
+    --bg-mid: #c9d3e2;  /* Couleur de fond intermédiaire (milieu) */
+    --bg-deep: #8fa2bf; /* Couleur de fond sombre (bas de page) */
+    --text: #222;       /* Couleur du texte principal */
+}
+
+
+/* ------------------------------------------------------------
+   FOND DE PAGE
+   Applique un dégradé vertical du clair vers le sombre
+   sur toute la hauteur de l'écran
+   ------------------------------------------------------------ */
+.page-gradient{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-mid) 45%, var(--bg-deep) 100%);
+    background-color: var(--bg-deep);  /* Couleur de secours si le dégradé ne s'affiche pas */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: var(--text);
+    min-height: 100vh; /* Prend au minimum toute la hauteur de l'écran */
+}
+
+
+/* ------------------------------------------------------------
+   BARRE DE NAVIGATION (en haut)
+   Fixée en haut de l'écran, toujours visible même en scrollant
+   ------------------------------------------------------------ */
+.top{
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(180deg, #0e2f4a 0%, #134161 55%, #1a5a7f 100%); /* Dégradé bleu sombre */
+    color: white;
+    display: flex;
+    align-items: center;       /* Centre le contenu verticalement */
+    padding: 0 2px;
+    justify-content: center;   /* Centre le contenu horizontalement */
+    position: fixed;           /* Fixée en haut — ne bouge pas au scroll */
+    top: 0;
+    left: 0;
+    z-index: 1000;             /* Au-dessus de tout le reste de la page */
+    box-shadow: 0 10px 24px rgba(10, 40, 60, 0.28); /* Ombre portée sous la nav */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Légère bordure blanche semi-transparente */
+}
+
+/* Boutons de navigation dans la barre du haut */
+.nav-btn {
+    text-decoration: none;   /* Pas de soulignement */
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    transition: background 0.2s; /* Animation douce au survol */
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15); /* Fond blanc semi-transparent au survol */
+}
+
+
+/* ------------------------------------------------------------
+   TITRES
+   ------------------------------------------------------------ */
+h1{
+    text-align: center;
+    margin: auto; /* Centre horizontalement */
+}
+h2{
+    text-align: center;
+    margin: auto;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENEUR DE PAGE
+   Limite la largeur du contenu et le centre
+   Le padding-top: 140px compense la navbar fixe de 100px
+   ------------------------------------------------------------ */
+.page{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 140px 16px 40px; /* Haut: 140px pour pas passer sous la navbar */
+}
+
+/* Version plus étroite pour la page de login */
+.page-login .page{
+    max-width: 520px;
+}
+
+
+/* ------------------------------------------------------------
+   CARTE DE LOGIN
+   La boîte blanche avec le formulaire de connexion
+   ------------------------------------------------------------ */
+.login-card{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08); /* Ombre douce */
+}
+
+.login-title{
+    margin: 0 0 6px;
+    font-size: 1.6rem;
+}
+
+.login-subtitle{
+    margin: 0 0 20px;
+    color: #555; /* Texte grisé */
+}
+
+/* Boutons en bas du formulaire alignés à droite */
+.login-actions{
+    display: flex;
+    justify-content: flex-end; /* Pousse les boutons à droite */
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* "Mot de passe oublié ?" aligné à droite */
+.login-help{
+    margin: 6px 0 2px;
+    text-align: right;
+}
+
+.login-link{
+    color: #1a5a7f;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.login-link:hover{
+    text-decoration: underline;
+}
+
+
+/* ------------------------------------------------------------
+   LAYOUT DU DASHBOARD
+   Conteneur principal avec sidebar positionnée à droite
+   ------------------------------------------------------------ */
+.dashboard-layout{
+    position: relative; /* Nécessaire pour le positionnement absolu de la sidebar */
+}
+
+/* Sidebar des stats, flottante à droite du contenu principal */
+.dashboard-sidebar{
+    display: grid;
+    gap: 16px;
+    width: 260px;
+    position: absolute;
+    top: 98px;
+    left: calc(100% + 20px); /* Placée juste à droite du contenu, avec 20px d'espace */
+}
+
+/* Sur petits écrans (< 1280px) la sidebar passe en dessous du contenu */
+@media (max-width: 1280px){
+    .dashboard-sidebar{
+        position: static;  /* Reprend le flux normal */
+        width: auto;
+        margin-top: 16px;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   CARTES DE STATISTIQUES (dans la sidebar)
+   ------------------------------------------------------------ */
+.stat-card{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.stat-label{
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.stat-value{
+    margin: 6px 0 12px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* Petit rond coloré devant chaque stat */
+.stat-icon{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;          /* Forme circulaire */
+    display: inline-block;
+    margin-right: 6px;
+    background: #8fa2bf;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.06);
+    vertical-align: middle;
+}
+
+/* Couleur du rond selon le type de stat */
+.stat-icon--all      { background: #1a5a7f; } /* Bleu — tous les tickets */
+.stat-icon--new      { background: #1a7f2e; } /* Vert — nouveaux */
+.stat-icon--progress { background: #b26a00; } /* Orange — en cours */
+.stat-icon--done     { background: #1f4e79; } /* Bleu foncé — terminés */
+
+/* Couleurs du texte selon le type de stat */
+.stat-label--new,
+.stat-value--new      { color: #1a7f2e; } /* Vert */
+
+.stat-label--progress,
+.stat-value--progress { color: #b26a00; } /* Orange */
+
+.stat-label--done,
+.stat-value--done     { color: #1f4e79; } /* Bleu foncé */
+
+/* Ligne de séparation entre les stats */
+.stat-divider{
+    height: 1px;
+    background: #e6e6e6;
+    margin: 8px 0 10px;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENU PRINCIPAL DU DASHBOARD
+   ------------------------------------------------------------ */
+.dashboard-main{
+    min-width: 0; /* Évite les débordements dans une grille/flex */
+}
+
+/* Titre de section aligné à gauche */
+.section h2{
+    margin: 0 0 8px;
+    text-align: left;
+}
+
+/* Espace entre deux sections */
+.section + .section{
+    margin-top: 32px;
+}
+
+/* Texte secondaire grisé (sous-titre, description) */
+.muted{
+    color: #555;
+    margin: 0 0 16px;
+}
+
+
+/* ------------------------------------------------------------
+   FORMULAIRE DE CRÉATION RAPIDE DE TICKET
+   Grille à 6 colonnes pour mettre tout sur une ligne
+   ------------------------------------------------------------ */
+.quick-ticket-form{
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr) 0.8fr auto;
+    gap: 10px;
+    margin: 12px 0 16px;
+    align-items: center;
+}
+
+.quick-ticket-form input,
+.quick-ticket-form select{
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font: inherit; /* Hérite de la police du reste de la page */
+    background: #fff;
+}
+
+/* Sur tablette (< 960px) passe en 2 colonnes */
+@media (max-width: 960px){
+    .quick-ticket-form{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   FILTRES PAR TYPE (boutons pill)
+   ------------------------------------------------------------ */
+.type-filter{
+    display: flex;
+    gap: 8px;
+    margin: 8px 0 16px;
+    flex-wrap: wrap; /* Passe à la ligne si pas assez de place */
+}
+
+.filter-btn{
+    border: 1px solid #c9c9c9;
+    border-radius: 999px; /* Forme de pilule */
+    padding: 6px 12px;
+    background: #fff;
+    font: inherit;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* Filtre actif — fond bleu */
+.filter-btn.is-active{
+    background: #1a5a7f;
+    color: #fff;
+    border-color: #1a5a7f;
+}
+
+.filter-btn:hover{
+    border-color: #1a5a7f; /* Bordure bleue au survol */
+}
+
+
+/* ------------------------------------------------------------
+   TABLEAU DES TICKETS
+   ------------------------------------------------------------ */
+.table-wrap{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* Cache les coins du tableau qui dépasseraient le border-radius */
+}
+
+.tickets-table{
+    width: 100%;
+    border-collapse: collapse; /* Fusionne les bordures des cellules */
+    font-size: 0.95rem;
+}
+
+.tickets-table th,
+.tickets-table td{
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.tickets-table th{
+    background: #f7f7f7; /* Fond légèrement grisé pour les en-têtes */
+}
+
+/* Pas de bordure sur la dernière ligne */
+.tickets-table tr:last-child td{
+    border-bottom: none;
+}
+
+/* Couleur de fond des lignes selon la priorité du ticket */
+.tickets-table tr.priority-low      { background: #d2f2d8; } /* Vert clair — basse priorité */
+.tickets-table tr.priority-medium   { background: #e3f2bf; } /* Jaune clair — priorité moyenne */
+.tickets-table tr.priority-high     { background: #ffd9b3; } /* Orange clair — haute priorité */
+.tickets-table tr.priority-critical { background: #ffc9c9; } /* Rouge clair — critique */
+.tickets-table tr.priority-default  { background: #fff;    } /* Blanc — pas de priorité */
+
+
+/* ------------------------------------------------------------
+   BULLES D'ASSIGNÉS
+   Petits badges arrondis pour afficher les noms des assignés
+   ------------------------------------------------------------ */
+.assignee-bubbles {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.assignee-bubble {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 999px;        /* Forme de pilule */
+    background: #e8f0f6;         /* Fond bleu très clair */
+    border: 1px solid #c9d6e2;
+    color: #223;
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+
+/* ------------------------------------------------------------
+   BOUTONS D'ACTION (modifier / supprimer)
+   ------------------------------------------------------------ */
+.action-buttons{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Message quand le tableau est vide */
+.empty{
+    text-align: center;
+    color: #777;
+    padding: 20px 10px;
+}
+
+
+/* ------------------------------------------------------------
+   BOUTONS GÉNÉRIQUES
+   ------------------------------------------------------------ */
+.btn{
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font: inherit;
+    cursor: pointer;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Bouton principal — bleu */
+.btn.btn-secondary{
+    background: #1a5a7f;
+    color: #fff;
+    border-color: #134c6d;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    min-width: 120px;
+    box-shadow: 0 6px 14px rgba(26, 90, 127, 0.2);
+}
+
+.btn.btn-secondary:hover{
+    background: #164c6a; /* Bleu plus foncé au survol */
+    border-color: #103e58;
+}
+
+/* Bouton de suppression — rouge */
+.btn.btn-danger{
+    background: #e46b6b;
+    color: #fff;
+    border-color: #c24d4d;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    min-width: 120px;
+    box-shadow: 0 6px 14px rgba(228, 107, 107, 0.25);
+}
+
+.btn.btn-danger:hover{
+    background: #dd5e5e; /* Rouge plus foncé au survol */
+    border-color: #b84646;
+}
+
+/* Contour visible quand on navigue au clavier (accessibilité) */
+.btn.btn-danger:focus-visible{
+    outline: 2px solid #1a5a7f;
+    outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   LAYOUT DE LA NAVBAR
+   ------------------------------------------------------------ */
+/* Espaces latéraux de la navbar (pour centrer le titre) */
+.header-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Le titre central prend plus de place que les côtés */
+.top h1 {
+    flex: 2;
+}

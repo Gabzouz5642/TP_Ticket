@@ -1,0 +1,193 @@
+/* ============================================================
+   LAYOUT PRINCIPAL DE LA PAGE PROJETS
+   Conteneur relatif nécessaire pour positionner la sidebar
+   ============================================================ */
+.project-layout{
+    position: relative; /* Nécessaire pour que la sidebar se positionne par rapport à ce conteneur */
+}
+
+
+/* ------------------------------------------------------------
+   SIDEBAR DES PROJETS
+   Flottante à GAUCHE du contenu (contrairement au dashboard
+   où elle était à droite)
+   ------------------------------------------------------------ */
+.project-sidebar{
+    display: grid;
+    gap: 16px;
+    width: 260px;
+    position: absolute;
+    top: 0;
+    left: calc(-260px - 20px); /* Placée à gauche : sa largeur (260px) + 20px d'espace */
+}
+
+/* Sur petit écran (< 960px) la sidebar passe au-dessus du contenu */
+@media (max-width: 960px){
+    .project-layout{
+        display: block; /* Annule tout positionnement spécial */
+    }
+    .project-sidebar{
+        position: static; /* Reprend le flux normal de la page */
+        width: auto;
+        margin-bottom: 16px; /* Espace sous la sidebar avant le contenu */
+    }
+}
+
+
+/* ------------------------------------------------------------
+   CARTES DE STATS DANS LA SIDEBAR
+   ------------------------------------------------------------ */
+.project-stat{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.project-stat-label{
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.project-stat-value{
+    margin: 6px 0 12px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* La valeur devient verte si le chiffre est positif (ex: heures restantes > 0) */
+.project-stat-value.is-positive{
+    color: #1a7f2e;
+}
+
+/* La valeur devient rouge si le chiffre est négatif (ex: dépassement d'heures) */
+.project-stat-value.is-negative{
+    color: #b00020;
+}
+
+/* Classes réutilisables pour colorier n'importe quel texte en vert/rouge */
+.is-positive{ color: #1a7f2e; } /* Vert — résultat favorable */
+.is-negative{ color: #b00020; } /* Rouge — résultat défavorable */
+
+/* Couleurs des petits ronds d'icône selon le type de stat */
+.stat-icon--projects  { background: #1a5a7f; } /* Bleu — nombre de projets */
+.stat-icon--hours     { background: #6b6b6b; } /* Gris — heures totales */
+.stat-icon--remaining { background: #b26a00; } /* Orange — heures restantes */
+.stat-icon--billable  { background: #d72626; } /* Rouge — heures facturables */
+
+/* Ligne de séparation entre les stats */
+.project-stat-divider{
+    height: 1px;
+    background: #e6e6e6;
+    margin: 8px 0 10px;
+}
+
+
+/* ------------------------------------------------------------
+   CONTENU PRINCIPAL
+   ------------------------------------------------------------ */
+.project-main{
+    min-width: 0; /* Évite les débordements dans une grille/flex */
+}
+
+
+/* ------------------------------------------------------------
+   LISTE DES PROJETS
+   Grille verticale — un projet par ligne
+   ------------------------------------------------------------ */
+.project-list{
+    display: grid;
+    gap: 16px; /* Espace entre chaque carte projet */
+}
+
+
+/* ------------------------------------------------------------
+   CARTE D'UN PROJET
+   ------------------------------------------------------------ */
+.project-card{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* En-tête de la carte : nom du projet à gauche, heures à droite */
+.project-header{
+    display: flex;
+    justify-content: space-between; /* Pousse les deux blocs aux extrémités */
+    gap: 16px;
+    flex-wrap: wrap; /* Passe à la ligne sur petit écran */
+}
+
+.project-title{
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+}
+
+.project-client{
+    margin: 0;
+    color: #555; /* Nom du client en grisé */
+}
+
+
+/* ------------------------------------------------------------
+   BLOC RÉSUMÉ DES HEURES (dans l'en-tête de la carte)
+   Petit encart gris avec les infos d'heures du projet
+   ------------------------------------------------------------ */
+.project-hours{
+    background: #f7f7f7;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    padding: 10px 12px;
+    min-width: 220px; /* Largeur minimum pour pas être trop écrasé */
+}
+
+.project-hours p{
+    margin: 0 0 6px;
+    font-size: 0.9rem;
+}
+
+
+/* ------------------------------------------------------------
+   SECTION TICKETS DU PROJET
+   ------------------------------------------------------------ */
+.project-meta{
+    margin-top: 12px;
+}
+
+/* Titre "Tickets liés" ou équivalent */
+.project-subtitle{
+    margin: 12px 0 6px;
+    font-weight: 700;
+}
+
+/* Liste des tickets sans puces */
+.project-ticket-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 6px; /* Petit espace entre chaque ticket */
+}
+
+/* Ligne d'un ticket : titre à gauche, infos à droite */
+.project-ticket-list li{
+    display: flex;
+    justify-content: space-between; /* Titre à gauche, meta à droite */
+    gap: 10px;
+    padding: 6px 10px;
+    background: #f7f9fb; /* Fond bleu très très clair */
+    border: 1px solid #e7edf2;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* Infos secondaires du ticket (statut, temps...) en grisé sans retour à la ligne */
+.ticket-meta{
+    color: #555;
+    white-space: nowrap; /* Force tout sur une seule ligne même si c'est long */
+}
