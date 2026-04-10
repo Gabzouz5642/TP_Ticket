@@ -1,8 +1,12 @@
 Voici une version encore plus exhaustive de votre fichier README.md. Elle intègre des détails techniques profonds sur la structure des données, les processus métiers (logique de calcul), la sécurité et les procédures de déploiement.
 
 🎫 TP Ticket - Système Expert de Gestion de Suivi de Temps
+
 📖 SommairePrésentationArchitecture TechniqueModélisation des DonnéesLogique Métier & FluxInstallation & ConfigurationInterface APISécurité & StandardsContribution📖 PrésentationTP Ticket est une solution de gestion de projet "Time Tracking" conçue pour les agences et freelances. Elle permet de transformer des interventions techniques en données exploitables pour la facturation en calculant l'écart entre le temps estimé et le temps réel.
-🛠 Architecture TechniqueL'application suit le pattern MVC (Modèle-Vue-Contrôleur) classique de Laravel :Modèles : Situés dans app/Models/, ils gèrent l'intégrité des données et les casts de types (ex: conversion automatique des taux horaires en décimaux).Contrôleurs : Situés dans app/Http/Controllers/, ils pilotent la logique (TicketController, ProjectController).Vues : Utilisation du moteur de template Blade couplé à du CSS/JS personnalisé pour une expérience utilisateur fluide.Pile TechnologiqueFramework : Laravel 12.xFrontend : Blade, Vite, Vanilla JSBackend : PHP 8.2+Qualité : PHPUnit 11, Laravel Pint
+
+🛠 Architecture TechniqueL'application suit le pattern MVC (Modèle-Vue-Contrôleur) classique de Laravel :Modèles : Situés dans app/Models/, ils gèrent l'intégrité des données et les casts de types (ex: conversion automatique des taux horaires en décimaux).Contrôleurs : Situés dans app/Http/Controllers/, ils pilotent la logique (TicketController, ProjectController).
+Vues : Utilisation du moteur de template Blade couplé à du CSS/JS personnalisé pour une expérience utilisateur fluide.Pile TechnologiqueFramework : Laravel 12.xFrontend : Blade, Vite, Vanilla JSBackend : PHP 8.2+Qualité : PHPUnit 11, Laravel Pint
+
 📊 Modélisation des DonnéesSchéma de Base de Données (Mermaid ERD)Extrait de codeerDiagram
     PROJECT ||--o{ TICKET : "possède"
     PROJECT {
@@ -49,6 +53,7 @@ Détails des Casts (Sécurité des types)Le système force la précision des don
     M->>DB: INSERT INTO tickets
     DB-->>C: Succès (ID)
     C-->>U: Redirection Dashboard avec message
+    
 💻 Installation & Configuration1. Clonage et DépendancesBashgit clone <repository-url>
 cd TP_Ticket-master
 composer install
@@ -65,6 +70,7 @@ php artisan key:generate
     "actual_time": "2.50",
     "project_id": 4
 }
+
 🛡 Sécurité & StandardsProtection Mass Assignment : Utilisation stricte de $fillable dans les modèles pour empêcher l'injection de colonnes non autorisées.CORS & CSRF : Protection activée sur toutes les routes Web pour prévenir les attaques cross-site.Hachage : Utilisation de l'algorithme Bcrypt (via hashed cast) pour les identifiants de connexion.Sécurisation API : Les données sensibles comme password et remember_token sont masquées via la propriété $hidden.
 
 🧪 TestsLe projet utilise PHPUnit. Pour garantir l'intégrité de la logique de calcul de temps :Bashphp artisan test
